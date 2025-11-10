@@ -1,9 +1,6 @@
 {
   "/page": "app/page.js",
-  "/about/page": "app/about/page.js",
-  "/profile/page": "app/profile/page.js",
-  "/register/page": "app/register/page.js",
-  "/login/page": "app/login/page.js",
-  "/contact/page": "app/contact/page.js",
+  "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
+  "/our-story/page": "app/our-story/page.js",
   "/icon.png/route": "app/icon.png/route.js"
 }

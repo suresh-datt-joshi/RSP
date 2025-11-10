@@ -34,7 +34,7 @@ export default function RootLayout({
               <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
                 <p>© {new Date().getFullYear()} SmartYield. All rights reserved.</p>
                 <div className="flex gap-4">
-                  <Link href="/about" className="transition hover:text-foreground">
+                  <Link href="/our-story" className="transition hover:text-foreground">
                     Our story
                   </Link>
                   <Link
