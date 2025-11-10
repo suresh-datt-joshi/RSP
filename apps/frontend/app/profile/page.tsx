@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 interface UserProfile {
   id: number;
@@ -17,8 +19,9 @@ interface UserProfile {
   is_verified: boolean;
 }
 
-export default function ProfilePage() {
+function ProfileContent() {
   const router = useRouter();
+  const { logout } = useAuth();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -54,8 +57,7 @@ export default function ProfilePage() {
 
       if (!response.ok) {
         if (response.status === 401) {
-          localStorage.removeItem("token");
-          router.push("/login");
+          logout();
           return;
         }
         throw new Error("Failed to fetch profile");
@@ -374,5 +376,14 @@ export default function ProfilePage() {
         </div>
       </div>
     </main>
+  );
+}
+
+
+export default function ProfilePage() {
+  return (
+    <ProtectedRoute>
+      <ProfileContent />
+    </ProtectedRoute>
   );
 }

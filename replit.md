@@ -52,12 +52,18 @@ SmartYield is a precision agriculture intelligence platform that provides yield 
 - **Authentication System**:
   - **Database**: PostgreSQL with SQLAlchemy ORM and Alembic migrations
   - **User Model**: Stores name, email, phone, password (hashed), country, state, district, gender, DOB
-  - **Security**: Bcrypt (v4.1.2) for password hashing, JWT tokens for sessions
+  - **Security**: Bcrypt (v4.1.2) for password hashing, JWT tokens for sessions (JWT_SECRET_KEY env var)
   - **Endpoints**: `/api/auth/register`, `/api/auth/login`, `/api/auth/me`, `/api/auth/forgot-password`, `/api/auth/reset-password`
-  - **Frontend Pages**: `/register`, `/login`, `/forgot-password`, `/profile`
+  - **Frontend Pages**: `/register`, `/login`, `/forgot-password`, `/profile` (all protected except login/register)
   - **Password Reset**: OTP-based flow (currently shows OTP in response for testing - remove in production)
   - **OAuth**: Google OAuth placeholder (integration pending)
-  - **Navigation**: Dynamic auth state management showing Login/Sign Up or Profile button
+  - **Navigation**: Simplified to 4 sections only: Home, Predict Yield, About, Profile
+  - **Auth Flow**: 
+    - Home page accessible to all users
+    - "Launch Predict Yield" button redirects unauthenticated users to login
+    - After successful login, users are redirected back to the intended page
+    - Predict Yield and Profile pages are protected routes (require authentication)
+  - **Auth Context**: Global authentication state managed via React Context API
 
 ## Development Setup
 

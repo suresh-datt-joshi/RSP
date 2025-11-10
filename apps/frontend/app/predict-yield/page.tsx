@@ -6,6 +6,7 @@ import LocationSelector from "@/components/LocationSelector";
 import ParameterForm from "@/components/ParameterForm";
 import YieldSummary from "@/components/YieldSummary";
 import InsightsPanel from "@/components/InsightsPanel";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import {
   AdviceResponse,
   FarmerInput,
@@ -343,55 +344,57 @@ export default function PredictYieldPage() {
   }, [prediction]);
 
   return (
-    <main className="mx-auto max-w-6xl space-y-8 px-4 py-10">
-      <section className="space-y-4 rounded-3xl bg-gradient-to-r from-primary to-primary-light p-8 text-white shadow-lg">
-        <header className="space-y-2">
-          <span className="rounded-full bg-white/20 px-3 py-1 text-xs uppercase tracking-wide">
-            SmartYield
-          </span>
-          <h1 className="text-3xl font-semibold md:text-4xl">
-            Forecast yield. Boost productivity.
-          </h1>
-          <p className="text-sm text-white/80 md:text-base">{headline}</p>
-        </header>
-        <div className="flex flex-wrap gap-3 text-xs text-white/80">
-          <span className="rounded-full bg-black/10 px-3 py-1">
-            Location-aware predictions
-          </span>
-          <span className="rounded-full bg-black/10 px-3 py-1">
-            Agronomy intelligence
-          </span>
-          <span className="rounded-full bg-black/10 px-3 py-1">
-            Weather + soil signals
-          </span>
-        </div>
-      </section>
+    <ProtectedRoute>
+      <main className="mx-auto max-w-6xl space-y-8 px-4 py-10">
+        <section className="space-y-4 rounded-3xl bg-gradient-to-r from-primary to-primary-light p-8 text-white shadow-lg">
+          <header className="space-y-2">
+            <span className="rounded-full bg-white/20 px-3 py-1 text-xs uppercase tracking-wide">
+              SmartYield
+            </span>
+            <h1 className="text-3xl font-semibold md:text-4xl">
+              Forecast yield. Boost productivity.
+            </h1>
+            <p className="text-sm text-white/80 md:text-base">{headline}</p>
+          </header>
+          <div className="flex flex-wrap gap-3 text-xs text-white/80">
+            <span className="rounded-full bg-black/10 px-3 py-1">
+              Location-aware predictions
+            </span>
+            <span className="rounded-full bg-black/10 px-3 py-1">
+              Agronomy intelligence
+            </span>
+            <span className="rounded-full bg-black/10 px-3 py-1">
+              Weather + soil signals
+            </span>
+          </div>
+        </section>
 
-      {error && (
-        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-          {error}
-        </div>
-      )}
+        {error && (
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+            {error}
+          </div>
+        )}
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
-          <LocationSelector value={farmerInput} onChange={onLocationChange} />
-          <ParameterForm
-            initialValues={farmerInput}
-            options={referenceOptions}
-            isSubmitting={isSubmitting}
-            onSubmit={(values) => {
-              setFarmerInput(values);
-              void handleSubmit(values);
-            }}
-          />
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="space-y-6 lg:col-span-2">
+            <LocationSelector value={farmerInput} onChange={onLocationChange} />
+            <ParameterForm
+              initialValues={farmerInput}
+              options={referenceOptions}
+              isSubmitting={isSubmitting}
+              onSubmit={(values) => {
+                setFarmerInput(values);
+                void handleSubmit(values);
+              }}
+            />
+          </div>
+          <div className="space-y-6">
+            <YieldSummary prediction={prediction} isLoading={isSubmitting} />
+            <InsightsPanel advice={advice} isLoading={isSubmitting} />
+          </div>
         </div>
-        <div className="space-y-6">
-          <YieldSummary prediction={prediction} isLoading={isSubmitting} />
-          <InsightsPanel advice={advice} isLoading={isSubmitting} />
-        </div>
-      </div>
-    </main>
+      </main>
+    </ProtectedRoute>
   );
 }
 

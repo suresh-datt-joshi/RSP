@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
 
 const features = [
   {
@@ -25,6 +29,19 @@ const stats = [
 ];
 
 export default function HomePage() {
+  const router = useRouter();
+  const { isAuthenticated } = useAuth();
+
+  const handlePredictYieldClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (!isAuthenticated) {
+      localStorage.setItem("redirectAfterLogin", "/predict-yield");
+      router.push("/login");
+    } else {
+      router.push("/predict-yield");
+    }
+  };
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <section className="grid items-center gap-10 rounded-3xl bg-gradient-to-r from-primary to-primary-light px-8 py-16 text-white shadow-lg md:grid-cols-2">
@@ -42,12 +59,13 @@ export default function HomePage() {
             decisions that matter most.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link
+            <a
               href="/predict-yield"
-              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-white/90"
+              onClick={handlePredictYieldClick}
+              className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition hover:bg-white/90 cursor-pointer"
             >
               Launch Predict Yield
-            </Link>
+            </a>
             <Link
               href="/about"
               className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
@@ -120,12 +138,13 @@ export default function HomePage() {
           Launch the prediction workspace to estimate yield and unlock proactive
           agronomy guidance.
         </p>
-        <Link
+        <a
           href="/predict-yield"
-          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary/90"
+          onClick={handlePredictYieldClick}
+          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary/90 cursor-pointer"
         >
           Start predicting now
-        </Link>
+        </a>
       </section>
     </main>
   );

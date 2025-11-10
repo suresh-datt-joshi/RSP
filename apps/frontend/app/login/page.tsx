@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email_or_phone: "",
     password: "",
@@ -49,11 +51,13 @@ export default function LoginPage() {
         throw new Error(data.detail || "Login failed");
       }
 
-      // Store token
-      localStorage.setItem("token", data.access_token);
+      // Store token and update auth context
+      await login(data.access_token);
       
-      // Redirect to predict yield page
-      router.push("/predict-yield");
+      // Redirect to intended page or predict yield
+      const redirectPath = localStorage.getItem("redirectAfterLogin") || "/predict-yield";
+      localStorage.removeItem("redirectAfterLogin");
+      router.push(redirectPath);
     } catch (err: any) {
       setError(err.message || "An error occurred during login");
     } finally {

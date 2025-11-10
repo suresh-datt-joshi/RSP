@@ -564,6 +564,9 @@ video {
 .mt-3 {
   margin-top: 0.75rem;
 }
+.mt-4 {
+  margin-top: 1rem;
+}
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -582,6 +585,9 @@ video {
 .grid {
   display: grid;
 }
+.h-12 {
+  height: 3rem;
+}
 .h-5 {
   height: 1.25rem;
 }
@@ -596,6 +602,9 @@ video {
 }
 .min-h-screen {
   min-height: 100vh;
+}
+.w-12 {
+  width: 3rem;
 }
 .w-5 {
   width: 1.25rem;
@@ -617,6 +626,18 @@ video {
 }
 .flex-1 {
   flex: 1 1 0%;
+}
+@keyframes spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -715,6 +736,9 @@ video {
 .border-2 {
   border-width: 2px;
 }
+.border-4 {
+  border-width: 4px;
+}
 .border-b {
   border-bottom-width: 1px;
 }
@@ -751,6 +775,9 @@ video {
 .border-white\/40 {
   border-color: rgb(255 255 255 / 0.4);
 }
+.border-t-transparent {
+  border-top-color: transparent;
+}
 .bg-accent\/10 {
   background-color: rgb(243 156 18 / 0.1);
 }
@@ -784,9 +811,6 @@ video {
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(30 127 92 / var(--tw-bg-opacity, 1));
-}
-.bg-primary\/10 {
-  background-color: rgb(30 127 92 / 0.1);
 }
 .bg-primary\/5 {
   background-color: rgb(30 127 92 / 0.05);
@@ -1083,10 +1107,6 @@ body {
 .hover\:bg-primary-light:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(47 159 116 / var(--tw-bg-opacity, 1));
-}
-
-.hover\:bg-primary\/20:hover {
-  background-color: rgb(30 127 92 / 0.2);
 }
 
 .hover\:bg-primary\/5:hover {
