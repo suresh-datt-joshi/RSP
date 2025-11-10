@@ -646,10 +646,17 @@ class CropLifecycleService:
         for i, date_str in enumerate(time_entries):
             forecast_date = date.fromisoformat(date_str)
             
-            precip = daily.get("precipitation_sum", [])[i] if i < len(daily.get("precipitation_sum", [])) else 0
-            precip_prob = daily.get("precipitation_probability_max", [])[i] if i < len(daily.get("precipitation_probability_max", [])) else 0
-            temp_max = daily.get("temperature_2m_max", [])[i] if i < len(daily.get("temperature_2m_max", [])) else None
-            windspeed = daily.get("windspeed_10m_max", [])[i] if i < len(daily.get("windspeed_10m_max", [])) else 0
+            precip_list = daily.get("precipitation_sum", [])
+            precip = precip_list[i] if i < len(precip_list) and precip_list[i] is not None else 0
+            
+            precip_prob_list = daily.get("precipitation_probability_max", [])
+            precip_prob = precip_prob_list[i] if i < len(precip_prob_list) and precip_prob_list[i] is not None else 0
+            
+            temp_max_list = daily.get("temperature_2m_max", [])
+            temp_max = temp_max_list[i] if i < len(temp_max_list) and temp_max_list[i] is not None else None
+            
+            windspeed_list = daily.get("windspeed_10m_max", [])
+            windspeed = windspeed_list[i] if i < len(windspeed_list) and windspeed_list[i] is not None else 0
             
             current_stage = None
             for stage in stages:
@@ -719,8 +726,9 @@ class CropLifecycleService:
         
         weather_by_date = {}
         for i, date_str in enumerate(forecast_dates):
+            precip_value = forecast_precip[i] if i < len(forecast_precip) and forecast_precip[i] is not None else 0
             weather_by_date[date_str] = {
-                "precipitation": forecast_precip[i] if i < len(forecast_precip) else 0
+                "precipitation": precip_value
             }
         
         for stage in stages:
