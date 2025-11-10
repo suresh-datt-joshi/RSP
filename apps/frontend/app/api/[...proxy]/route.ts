@@ -9,12 +9,19 @@ export async function GET(
   const path = params.proxy.join('/');
   const url = `${BACKEND_URL}/api/${path}${request.nextUrl.search}`;
   
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  
+  const authHeader = request.headers.get('authorization');
+  if (authHeader) {
+    headers['Authorization'] = authHeader;
+  }
+  
   try {
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
     });
     
     const data = await response.json();
@@ -35,13 +42,55 @@ export async function POST(
   const path = params.proxy.join('/');
   const url = `${BACKEND_URL}/api/${path}`;
   
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  
+  const authHeader = request.headers.get('authorization');
+  if (authHeader) {
+    headers['Authorization'] = authHeader;
+  }
+  
   try {
     const body = await request.json();
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
+      body: JSON.stringify(body),
+    });
+    
+    const data = await response.json();
+    return NextResponse.json(data, { status: response.status });
+  } catch (error) {
+    console.error('Proxy error:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch from backend' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { proxy: string[] } }
+) {
+  const path = params.proxy.join('/');
+  const url = `${BACKEND_URL}/api/${path}`;
+  
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  
+  const authHeader = request.headers.get('authorization');
+  if (authHeader) {
+    headers['Authorization'] = authHeader;
+  }
+  
+  try {
+    const body = await request.json();
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers,
       body: JSON.stringify(body),
     });
     

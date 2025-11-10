@@ -40,7 +40,10 @@ SmartYield is a precision agriculture intelligence platform that provides yield 
   - Removed wildcard `*` origin (incompatible with credentials)
   - Added regex pattern for Replit domains: `https://.*\.replit\.dev`
   - Maintained localhost origins for development
-- **API Proxy**: Created Next.js API route at `/api/[...proxy]/route.ts` to proxy requests to backend
+- **API Proxy**: 
+  - Created Next.js API route at `/api/[...proxy]/route.ts` to proxy requests to backend
+  - Fixed Authorization header forwarding to enable JWT authentication (GET, POST, PUT methods)
+  - Properly forwards Bearer tokens from frontend to backend for protected routes
 - **PYTHONPATH**: Configured workflow to include project root in PYTHONPATH for monorepo imports
 - **YieldSummary Component**: 
   - Added defensive guards to prevent crashes with malformed data
@@ -65,6 +68,11 @@ SmartYield is a precision agriculture intelligence platform that provides yield 
     - After successful login, users are redirected back to the intended page
     - Predict Yield and Profile pages are protected routes (require authentication)
   - **Auth Context**: Global authentication state managed via React Context API
+  - **Profile Page**: 
+    - Displays complete user information (name, email, phone, gender, DOB, country, state, district)
+    - Edit profile functionality with inline form
+    - Logout button to clear session and return to home page
+    - Uses auth context logout() method for proper state management
 
 ## Development Setup
 
