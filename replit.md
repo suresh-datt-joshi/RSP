@@ -40,6 +40,14 @@ SmartYield is a precision agriculture intelligence platform that provides yield 
   - Maintained localhost origins for development
 - **API Proxy**: Created Next.js API route at `/api/[...proxy]/route.ts` to proxy requests to backend
 - **PYTHONPATH**: Configured workflow to include project root in PYTHONPATH for monorepo imports
+- **YieldSummary Component**: 
+  - Added defensive guards to prevent crashes with malformed data
+  - Added optional chaining and fallbacks for all numeric display values
+  - Verified data mapping from backend snake_case to frontend camelCase is working correctly
+- **Data Flow**: 
+  - Backend returns: `predicted_yield`, `baseline_yield`, `weather_outlook` (snake_case)
+  - Frontend mapper converts to: `predictedYield`, `baselineYield`, `weatherOutlook` (camelCase)
+  - Weather outlook nested fields use camelCase in backend: `rainfallOutlook`, `temperatureTrend`
 
 ## Development Setup
 

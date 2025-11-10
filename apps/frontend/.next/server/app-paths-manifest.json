@@ -1,7 +1,6 @@
 {
-  "/about/page": "app/about/page.js",
-  "/contact/page": "app/contact/page.js",
   "/page": "app/page.js",
+  "/predict-yield/page": "app/predict-yield/page.js",
   "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
-  "/predict-yield/page": "app/predict-yield/page.js"
+  "/about/page": "app/about/page.js"
 }

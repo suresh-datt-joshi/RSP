@@ -31,7 +31,7 @@ export default function YieldSummary({
     );
   }
 
-  if (!prediction) {
+  if (!prediction || typeof prediction.predictedYield !== 'number') {
     return (
       <section className="rounded-2xl bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold text-primary-dark">
@@ -63,10 +63,10 @@ export default function YieldSummary({
             Predicted Yield
           </span>
           <p className="mt-2 text-3xl font-semibold">
-            {prediction.predictedYield.toFixed(2)} t/ha
+            {prediction.predictedYield?.toFixed(2) || '0.00'} t/ha
           </p>
           <p className="text-xs text-primary-light">
-            Confidence: {(prediction.confidence * 100).toFixed(0)}%
+            Confidence: {((prediction.confidence || 0) * 100).toFixed(0)}%
           </p>
         </div>
         <div className="rounded-xl bg-gray-100 p-4">
@@ -74,7 +74,7 @@ export default function YieldSummary({
             Baseline
           </span>
           <p className="mt-2 text-2xl font-semibold text-gray-800">
-            {prediction.baselineYield.toFixed(2)} t/ha
+            {prediction.baselineYield?.toFixed(2) || '0.00'} t/ha
           </p>
           <p className="text-xs text-gray-500">
             Comparison with last 5-year district average
@@ -85,13 +85,13 @@ export default function YieldSummary({
             Weather Outlook
           </span>
           <p className="mt-2 text-base font-medium">
-            {prediction.weatherOutlook.summary}
+            {prediction.weatherOutlook?.summary || 'N/A'}
           </p>
           <p className="text-xs text-accent/80">
-            Rainfall: {prediction.weatherOutlook.rainfallOutlook}
+            Rainfall: {prediction.weatherOutlook?.rainfallOutlook || 'N/A'}
           </p>
           <p className="text-xs text-accent/80">
-            Temperature: {prediction.weatherOutlook.temperatureTrend}
+            Temperature: {prediction.weatherOutlook?.temperatureTrend || 'N/A'}
           </p>
         </div>
       </div>
