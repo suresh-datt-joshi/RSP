@@ -1,6 +1,6 @@
 {
-  "app/dyoal/page.tsx -> @/components/LocationSelectorMap": {
-    "id": "app/dyoal/page.tsx -> @/components/LocationSelectorMap",
+  "app/caldyn/page.tsx -> @/components/LocationSelectorMap": {
+    "id": "app/caldyn/page.tsx -> @/components/LocationSelectorMap",
     "files": [
       "static/css/_app-pages-browser_components_LocationSelectorMap_tsx.css",
       "static/chunks/_app-pages-browser_components_LocationSelectorMap_tsx.js"

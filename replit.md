@@ -61,7 +61,7 @@ SmartYield is a precision agriculture intelligence platform that provides yield 
   - **Frontend Pages**: `/register`, `/login`, `/forgot-password`, `/profile` (all protected except login/register)
   - **Password Reset**: OTP-based flow (currently shows OTP in response for testing - remove in production)
   - **OAuth**: Google OAuth placeholder (integration pending)
-  - **Navigation**: 5 sections: Home, Predict Yield, Dyoal, About, Profile
+  - **Navigation**: 5 sections: Home, Predict Yield, CalDyn, About, Profile
   - **Auth Flow**: 
     - Home page accessible to all users
     - "Launch Predict Yield" button redirects unauthenticated users to login
@@ -117,7 +117,7 @@ The `dev` workflow starts both frontend and backend:
 
 ## Features
 
-### Dyoal (Dynamic Crop Lifecycle Calendar)
+### CalDyn (Calendar Dynamic - Crop Lifecycle Calendar)
 - **Purpose**: Provides farmers with personalized crop lifecycle calendars
 - **Functionality**:
   - Stage-by-stage crop growth tracking
@@ -128,7 +128,7 @@ The `dev` workflow starts both frontend and backend:
 - **Supported Crops**: Wheat, Rice, Maize, Cotton, Soybean, Sugarcane
 - **Weather Integration**: Open-Meteo API for real-time weather forecasts and alerts
 - **Backend**: `/api/crop-lifecycle/generate` endpoint
-- **Frontend**: `/dyoal` page (authentication required)
+- **Frontend**: `/caldyn` page (authentication required)
 
 ## User Preferences
 - Clean, maintainable code following best practices

@@ -12,7 +12,7 @@ async def generate_crop_lifecycle(request: CropLifecycleRequest) -> CropLifecycl
     Generate a complete crop lifecycle calendar with stage-wise care instructions,
     irrigation and fertilizer schedules, and weather-based alerts.
     
-    This endpoint provides dynamic calendar (Dyoal) functionality with:
+    This endpoint provides dynamic calendar (CalDyn) functionality with:
     - Detailed growth stages and their durations
     - Stage-specific care activities and recommendations
     - Irrigation and fertilization schedules

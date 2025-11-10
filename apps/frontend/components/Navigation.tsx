@@ -25,8 +25,8 @@ export default function Navigation() {
           >
             Predict Yield
           </Link>
-          <Link href="/dyoal" className="transition hover:text-foreground">
-            Dyoal
+          <Link href="/caldyn" className="transition hover:text-foreground">
+            CalDyn
           </Link>
           <Link href="/about" className="transition hover:text-foreground">
             About
