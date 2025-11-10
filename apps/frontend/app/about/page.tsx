@@ -20,19 +20,19 @@ const values = [
 
 const milestones = [
   {
-    caption: "2019",
+    caption: "2024",
     title: "Research origins",
     description:
       "Launched as a university research initiative exploring satellite-informed yield modeling."
   },
   {
-    caption: "2021",
+    caption: "2025",
     title: "Pilot deployments",
     description:
       "Partnered with cooperatives across India to validate models against on-field trials."
   },
   {
-    caption: "2024",
+    caption: "2026",
     title: "SmartYield Platform",
     description:
       "Released the unified platform powering advisory teams, farmer networks, and agri-input providers."
