@@ -62,12 +62,12 @@ export default function RootLayout({
                   <Link href="/about" className="transition hover:text-foreground">
                     Our story
                   </Link>
-                  <a
-                    href="mailto:hello@smartyield.ai"
+                  <Link
+                    href="/about#team"
                     className="transition hover:text-foreground"
                   >
                     Contact
-                  </a>
+                  </Link>
                 </div>
               </div>
             </footer>

@@ -116,7 +116,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="space-y-6">
+      <section id="team" className="space-y-6 scroll-mt-20">
         <h2 className="text-2xl font-semibold text-foreground">
           Meet the Team
         </h2>
