@@ -63,7 +63,7 @@ export default function RootLayout({
                     Our story
                   </Link>
                   <Link
-                    href="/about#team"
+                    href="/contact"
                     className="transition hover:text-foreground"
                   >
                     Contact
