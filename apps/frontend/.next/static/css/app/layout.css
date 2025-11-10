@@ -982,6 +982,10 @@ body {
   color: rgb(30 127 92 / 0.8);
 }
 
+.hover\:underline:hover {
+  text-decoration-line: underline;
+}
+
 .focus\:border-primary:focus {
   --tw-border-opacity: 1;
   border-color: rgb(30 127 92 / var(--tw-border-opacity, 1));

@@ -39,6 +39,29 @@ const milestones = [
   }
 ];
 
+const teamMembers = [
+  {
+    name: "Khallikkunaisa",
+    email: "khallikkunaisa.cs@hkbk.edu.in"
+  },
+  {
+    name: "Suresh Datt Joshi",
+    email: "sureshdj9632@gmail.com"
+  },
+  {
+    name: "V Tilak Teja",
+    email: "1hk22cs182@hkbk.edu.in"
+  },
+  {
+    name: "Swaran Raj E S",
+    email: "swaranraj733@gmail.com"
+  },
+  {
+    name: "Tharun R",
+    email: "1hk22cs179@hkbk.edu.in"
+  }
+];
+
 export default function AboutPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-16 space-y-16">
@@ -92,6 +115,31 @@ export default function AboutPage() {
                   {milestone.description}
                 </p>
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-6">
+        <h2 className="text-2xl font-semibold text-foreground">
+          Meet the Team
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {teamMembers.map((member) => (
+            <div
+              key={member.email}
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-2"
+            >
+              <h3 className="text-lg font-semibold text-foreground">
+                {member.name}
+              </h3>
+              <a
+                href={`mailto:${member.email}`}
+                className="flex items-center gap-2 text-sm text-primary hover:underline"
+              >
+                <span>✉️</span>
+                <span>{member.email}</span>
+              </a>
             </div>
           ))}
         </div>
