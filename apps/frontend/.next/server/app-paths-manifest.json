@@ -1,7 +1,9 @@
 {
   "/page": "app/page.js",
-  "/profile/page": "app/profile/page.js",
   "/login/page": "app/login/page.js",
+  "/profile/page": "app/profile/page.js",
   "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
-  "/predict-yield/page": "app/predict-yield/page.js"
+  "/predict-yield/page": "app/predict-yield/page.js",
+  "/register/page": "app/register/page.js",
+  "/forgot-password/page": "app/forgot-password/page.js"
 }
