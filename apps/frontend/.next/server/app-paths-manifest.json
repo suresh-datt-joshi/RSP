@@ -3,7 +3,7 @@
   "/about/page": "app/about/page.js",
   "/login/page": "app/login/page.js",
   "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
-  "/predict-yield/page": "app/predict-yield/page.js",
   "/profile/page": "app/profile/page.js",
-  "/forgot-password/page": "app/forgot-password/page.js"
+  "/forgot-password/page": "app/forgot-password/page.js",
+  "/register/page": "app/register/page.js"
 }
