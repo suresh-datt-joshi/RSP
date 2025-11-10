@@ -41,10 +41,6 @@ const milestones = [
 
 const teamMembers = [
   {
-    name: "Khallikkunaisa",
-    email: "khallikkunaisa.cs@hkbk.edu.in"
-  },
-  {
     name: "Suresh Datt Joshi",
     email: "sureshdj9632@gmail.com"
   },
