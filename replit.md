@@ -30,6 +30,7 @@ SmartYield is a precision agriculture intelligence platform that provides yield 
 
 ### November 10, 2025
 - **Port Configuration**: Updated Next.js to bind to port 5000 on 0.0.0.0
+- **Webpack Configuration**: Added explicit publicPath setting to fix dynamic import chunk loading issues
 - **Pydantic v2 Migration**: 
   - Updated imports from `pydantic.BaseSettings` to `pydantic_settings.BaseSettings`
   - Migrated from `conlist/conset` to `Annotated` types with `Field(min_length=...)`

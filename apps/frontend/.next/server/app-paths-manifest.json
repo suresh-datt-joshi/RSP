@@ -1,6 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
+  "/predict-yield/page": "app/predict-yield/page.js",
+  "/login/page": "app/login/page.js",
   "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
-  "/predict-yield/page": "app/predict-yield/page.js"
+  "/about/page": "app/about/page.js"
 }
