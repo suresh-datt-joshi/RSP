@@ -10,7 +10,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "SmartYield Platform",
   description:
-    "Predict crop yields and discover agronomic insights tailored to your field."
+    "Predict crop yields and discover agronomic insights tailored to your field.",
+  icons: {
+    icon: '/icon.png',
+  }
 };
 
 export default function RootLayout({

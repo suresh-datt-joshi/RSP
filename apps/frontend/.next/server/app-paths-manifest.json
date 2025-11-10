@@ -1,6 +1,6 @@
 {
+  "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
+  "/about/page": "app/about/page.js",
   "/page": "app/page.js",
-  "/caldyn/page": "app/caldyn/page.js",
-  "/predict-yield/page": "app/predict-yield/page.js",
-  "/api/[...proxy]/route": "app/api/[...proxy]/route.js"
+  "/icon.png/route": "app/icon.png/route.js"
 }
