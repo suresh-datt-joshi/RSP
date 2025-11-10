@@ -1,6 +1,6 @@
 {
   "/page": "app/page.js",
-  "/login/page": "app/login/page.js",
   "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
+  "/login/page": "app/login/page.js",
   "/caldyn/page": "app/caldyn/page.js"
 }

@@ -607,7 +607,9 @@ class CropLifecycleService:
         weather_forecast = await cls.get_weather_forecast(request.latitude, request.longitude)
         weather_alerts = cls._generate_weather_alerts(weather_forecast, request.planting_date, stages)
         
-        irrigation_schedule = cls._generate_irrigation_schedule(stages, request.planting_date)
+        irrigation_schedule = await cls._generate_irrigation_schedule_with_weather(
+            stages, request.planting_date, request.latitude, request.longitude
+        )
         fertilizer_schedule = cls._generate_fertilizer_schedule(stages, request.planting_date)
         
         general_tips = cls._get_general_care_tips(request.crop_type)
@@ -697,8 +699,60 @@ class CropLifecycleService:
         return alerts[:5]
 
     @staticmethod
+    async def _generate_irrigation_schedule_with_weather(
+        stages: List[CropStage], 
+        planting_date: date,
+        latitude: float,
+        longitude: float
+    ) -> List[dict]:
+        """Generate irrigation schedule with weather-based recommendations"""
+        schedule = []
+        today = date.today()
+        
+        weather_data = await CropLifecycleService._fetch_weather_data(latitude, longitude)
+        daily_forecasts = weather_data.get("daily", {})
+        forecast_dates = daily_forecasts.get("time", [])
+        forecast_precip = daily_forecasts.get("precipitation_sum", [])
+        
+        weather_by_date = {}
+        for i, date_str in enumerate(forecast_dates):
+            weather_by_date[date_str] = {
+                "precipitation": forecast_precip[i] if i < len(forecast_precip) else 0
+            }
+        
+        for stage in stages:
+            if stage.end_date >= today:
+                upcoming_rain = 0
+                rain_days = []
+                
+                for days_ahead in range(0, 3):
+                    check_date = today + timedelta(days=days_ahead)
+                    date_str = check_date.isoformat()
+                    if date_str in weather_by_date:
+                        precip = weather_by_date[date_str]["precipitation"]
+                        if precip > 5:
+                            upcoming_rain += precip
+                            rain_days.append(f"{check_date.strftime('%b %d')} ({precip:.1f}mm)")
+                
+                recommendation = stage.irrigation_frequency
+                if upcoming_rain > 10:
+                    recommendation = f"⚠️ Skip irrigation - Rain forecasted: {', '.join(rain_days)}. Resume when soil dries."
+                elif upcoming_rain > 5:
+                    recommendation = f"⏸️ Delay irrigation - Light rain expected: {', '.join(rain_days)}. Monitor soil moisture."
+                
+                schedule.append({
+                    "stage": stage.stage_name,
+                    "period": f"{stage.start_date.strftime('%b %d')} - {stage.end_date.strftime('%b %d')}",
+                    "frequency": stage.irrigation_frequency,
+                    "recommendation": recommendation,
+                    "is_critical": "critical" in stage.irrigation_frequency.lower() or "most critical" in stage.irrigation_frequency.lower()
+                })
+        
+        return schedule
+
+    @staticmethod
     def _generate_irrigation_schedule(stages: List[CropStage], planting_date: date) -> List[dict]:
-        """Generate irrigation schedule based on crop stages"""
+        """Generate basic irrigation schedule (fallback without weather)"""
         schedule = []
         today = date.today()
         
@@ -708,6 +762,7 @@ class CropLifecycleService:
                     "stage": stage.stage_name,
                     "period": f"{stage.start_date.strftime('%b %d')} - {stage.end_date.strftime('%b %d')}",
                     "frequency": stage.irrigation_frequency,
+                    "recommendation": stage.irrigation_frequency,
                     "is_critical": "critical" in stage.irrigation_frequency.lower() or "most critical" in stage.irrigation_frequency.lower()
                 })
         

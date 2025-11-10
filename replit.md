@@ -121,10 +121,16 @@ The `dev` workflow starts both frontend and backend:
 - **Purpose**: Provides farmers with personalized crop lifecycle calendars
 - **Functionality**:
   - Stage-by-stage crop growth tracking
+  - **Intelligent weather-based irrigation recommendations**:
+    - Automatically checks 3-day rainfall forecast
+    - Recommends **skipping irrigation** when >10mm rain expected
+    - Suggests **delaying irrigation** when 5-10mm rain forecasted
+    - Based on agricultural best practices (rain skip threshold: 5-10mm)
   - Weather-based alerts using Open-Meteo API (free, no API key required)
   - Irrigation and fertilizer schedules
   - Risk management and care recommendations
   - Harvest readiness indicators
+  - Interactive map-based location selection with reverse geocoding
 - **Supported Crops**: Wheat, Rice, Maize, Cotton, Soybean, Sugarcane
 - **Weather Integration**: Open-Meteo API for real-time weather forecasts and alerts
 - **Backend**: `/api/crop-lifecycle/generate` endpoint

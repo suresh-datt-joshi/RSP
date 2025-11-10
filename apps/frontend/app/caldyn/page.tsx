@@ -46,6 +46,7 @@ interface CropLifecycle {
     stage: string;
     period: string;
     frequency: string;
+    recommendation: string;
     is_critical: boolean;
   }>;
   fertilizer_schedule: Array<{
@@ -82,13 +83,28 @@ function CalDynContent() {
   const [error, setError] = useState("");
   const [activeStage, setActiveStage] = useState<number | null>(null);
 
-  const handleLocationSelect = (lat: number, lng: number, name: string) => {
-    setFormData(prev => ({
-      ...prev,
-      latitude: lat,
-      longitude: lng,
-      locationName: name
-    }));
+  const handleLocationSelect = async (lat: number, lng: number) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+      );
+      const data = await response.json();
+      const locationName = data.display_name || `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+      
+      setFormData(prev => ({
+        ...prev,
+        latitude: lat,
+        longitude: lng,
+        locationName
+      }));
+    } catch (error) {
+      setFormData(prev => ({
+        ...prev,
+        latitude: lat,
+        longitude: lng,
+        locationName: `${lat.toFixed(4)}, ${lng.toFixed(4)}`
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -216,9 +232,15 @@ function CalDynContent() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Select Location *
+                  Select Location * (Click on the map)
                 </label>
-                <LocationSelectorMap onLocationSelect={handleLocationSelect} />
+                <div className="h-64 rounded-lg overflow-hidden border border-gray-300">
+                  <LocationSelectorMap 
+                    latitude={formData.latitude || undefined}
+                    longitude={formData.longitude || undefined}
+                    onSelect={handleLocationSelect} 
+                  />
+                </div>
                 {formData.locationName && (
                   <p className="mt-2 text-sm text-green-600">
                     Selected: {formData.locationName}
@@ -438,25 +460,55 @@ function CalDynContent() {
               <div className="rounded-xl border border-gray-200 bg-white p-6 shadow">
                 <h3 className="text-xl font-semibold text-gray-800">💧 Irrigation Schedule</h3>
                 <div className="mt-4 space-y-3">
-                  {lifecycle.irrigation_schedule.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className={`rounded-lg border p-3 ${item.is_critical ? "border-red-300 bg-red-50" : "border-gray-200 bg-gray-50"}`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="font-medium text-gray-900">{item.stage}</p>
-                          <p className="text-sm text-gray-600">{item.period}</p>
+                  {lifecycle.irrigation_schedule.map((item, idx) => {
+                    const hasWeatherAlert = item.recommendation !== item.frequency;
+                    const skipIrrigation = item.recommendation.includes('Skip');
+                    const delayIrrigation = item.recommendation.includes('Delay');
+                    
+                    return (
+                      <div
+                        key={idx}
+                        className={`rounded-lg border p-3 ${
+                          skipIrrigation 
+                            ? "border-blue-300 bg-blue-50" 
+                            : delayIrrigation
+                            ? "border-yellow-300 bg-yellow-50"
+                            : item.is_critical 
+                            ? "border-red-300 bg-red-50" 
+                            : "border-gray-200 bg-gray-50"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="font-medium text-gray-900">{item.stage}</p>
+                            <p className="text-sm text-gray-600">{item.period}</p>
+                          </div>
+                          {item.is_critical && !hasWeatherAlert && (
+                            <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white">
+                              Critical
+                            </span>
+                          )}
                         </div>
-                        {item.is_critical && (
-                          <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white">
-                            Critical
-                          </span>
-                        )}
+                        <div className="mt-2 space-y-1">
+                          <p className="text-sm text-gray-700">
+                            <span className="font-medium">Schedule:</span> {item.frequency}
+                          </p>
+                          {hasWeatherAlert && (
+                            <div className={`rounded-md p-2 text-sm ${
+                              skipIrrigation 
+                                ? "bg-blue-100 text-blue-900" 
+                                : "bg-yellow-100 text-yellow-900"
+                            }`}>
+                              <p className="font-semibold">
+                                {skipIrrigation ? '🌧️ Weather Alert' : '⚠️ Weather Update'}
+                              </p>
+                              <p className="mt-1">{item.recommendation}</p>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <p className="mt-2 text-sm text-gray-700">{item.frequency}</p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 
