@@ -1,5 +1,6 @@
 from functools import lru_cache
-from pydantic import BaseSettings, Field
+from pydantic_settings import BaseSettings
+from pydantic import Field
 
 
 class Settings(BaseSettings):
@@ -10,7 +11,10 @@ class Settings(BaseSettings):
   cors_origins: list[str] = Field(
       default_factory=lambda: [
           "http://localhost:3000",
-          "http://127.0.0.1:3000"
+          "http://localhost:5000",
+          "http://127.0.0.1:3000",
+          "http://127.0.0.1:5000",
+          "*"
       ]
   )
   model_data_path: str = Field(default="data/processed")
