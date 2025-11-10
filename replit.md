@@ -48,6 +48,15 @@ SmartYield is a precision agriculture intelligence platform that provides yield 
   - Backend returns: `predicted_yield`, `baseline_yield`, `weather_outlook` (snake_case)
   - Frontend mapper converts to: `predictedYield`, `baselineYield`, `weatherOutlook` (camelCase)
   - Weather outlook nested fields use camelCase in backend: `rainfallOutlook`, `temperatureTrend`
+- **Authentication System**:
+  - **Database**: PostgreSQL with SQLAlchemy ORM and Alembic migrations
+  - **User Model**: Stores name, email, phone, password (hashed), country, state, district, gender, DOB
+  - **Security**: Bcrypt (v4.1.2) for password hashing, JWT tokens for sessions
+  - **Endpoints**: `/api/auth/register`, `/api/auth/login`, `/api/auth/me`, `/api/auth/forgot-password`, `/api/auth/reset-password`
+  - **Frontend Pages**: `/register`, `/login`, `/forgot-password`, `/profile`
+  - **Password Reset**: OTP-based flow (currently shows OTP in response for testing - remove in production)
+  - **OAuth**: Google OAuth placeholder (integration pending)
+  - **Navigation**: Dynamic auth state management showing Login/Sign Up or Profile button
 
 ## Development Setup
 
