@@ -5,5 +5,6 @@
   "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
   "/profile/page": "app/profile/page.js",
   "/forgot-password/page": "app/forgot-password/page.js",
+  "/predict-yield/page": "app/predict-yield/page.js",
   "/register/page": "app/register/page.js"
 }
