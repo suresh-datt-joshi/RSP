@@ -709,7 +709,10 @@ class CropLifecycleService:
         schedule = []
         today = date.today()
         
-        weather_data = await CropLifecycleService._fetch_weather_data(latitude, longitude)
+        weather_data = await CropLifecycleService.get_weather_forecast(latitude, longitude)
+        if not weather_data:
+            return CropLifecycleService._generate_irrigation_schedule(stages, planting_date)
+        
         daily_forecasts = weather_data.get("daily", {})
         forecast_dates = daily_forecasts.get("time", [])
         forecast_precip = daily_forecasts.get("precipitation_sum", [])
