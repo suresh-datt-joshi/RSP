@@ -15,7 +15,7 @@ import {
 import { mapAdvice, mapPrediction } from "@/lib/api";
 
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
 const DEFAULT_REFERENCE_OPTIONS: ReferenceOptions = {
   crops: [

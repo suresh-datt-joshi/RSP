@@ -1,6 +1,7 @@
 from datetime import date
 from typing import Literal
-from pydantic import BaseModel, Field, conlist, conset, validator
+from pydantic import BaseModel, Field, field_validator
+from typing import Annotated
 
 CropType = Literal["wheat", "rice", "maize", "cotton", "soybean", "sugarcane"]
 SoilType = Literal["alluvial", "black", "red", "laterite", "loamy", "sandy"]
@@ -19,7 +20,8 @@ class FarmerInput(BaseModel):
   fertilizer_usage: float = Field(..., ge=0)
   sowing_date: date
 
-  @validator("location_name")
+  @field_validator("location_name")
+  @classmethod
   def normalize_location(cls, value: str) -> str:
     return value.strip().title()
 
@@ -34,9 +36,9 @@ class YieldPredictionResponse(BaseModel):
   unit: Literal["tons_per_hectare"] = "tons_per_hectare"
   confidence: float = Field(..., ge=0, le=1)
   baseline_yield: float = Field(..., ge=0)
-  historical_yields: conlist(YieldHistoryPoint, min_items=3)
-  risk_alerts: conset(str, min_items=0) = set()
-  recommended_practices: conlist(str, min_items=1)
+  historical_yields: Annotated[list[YieldHistoryPoint], Field(min_length=3)]
+  risk_alerts: Annotated[set[str], Field(min_length=0)] = set()
+  recommended_practices: Annotated[list[str], Field(min_length=1)]
   weather_outlook: dict[str, str]
 
 
@@ -53,7 +55,7 @@ class AdviceCard(BaseModel):
 
 
 class AdviceResponse(BaseModel):
-  knowledge_base: conlist(AdviceCard, min_items=1)
+  knowledge_base: Annotated[list[AdviceCard], Field(min_length=1)]
 
 
 class ReferenceOptions(BaseModel):

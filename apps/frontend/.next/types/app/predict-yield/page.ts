@@ -1,4 +1,4 @@
-// File: C:\Users\Suresh\imp project\apps\frontend\app\predict-yield\page.tsx
+// File: /home/runner/workspace/apps/frontend/app/predict-yield/page.tsx
 import * as entry from '../../../../app/predict-yield/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

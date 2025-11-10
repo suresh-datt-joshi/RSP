@@ -1,6 +1,6 @@
 {
-  "components\\LocationSelector.tsx -> ./LocationSelectorMap": {
-    "id": "components\\LocationSelector.tsx -> ./LocationSelectorMap",
+  "components/LocationSelector.tsx -> ./LocationSelectorMap": {
+    "id": "components/LocationSelector.tsx -> ./LocationSelectorMap",
     "files": [
       "static/css/_app-pages-browser_components_LocationSelectorMap_tsx.css",
       "static/chunks/_app-pages-browser_components_LocationSelectorMap_tsx.js"
