@@ -4,9 +4,10 @@ const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8000';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { proxy: string[] } }
+  { params }: { params: Promise<{ proxy: string[] }> }
 ) {
-  const path = params.proxy.join('/');
+  const { proxy } = await params;
+  const path = proxy.join('/');
   const url = `${BACKEND_URL}/api/${path}${request.nextUrl.search}`;
   
   const headers: Record<string, string> = {
@@ -37,9 +38,10 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { proxy: string[] } }
+  { params }: { params: Promise<{ proxy: string[] }> }
 ) {
-  const path = params.proxy.join('/');
+  const { proxy } = await params;
+  const path = proxy.join('/');
   const url = `${BACKEND_URL}/api/${path}`;
   
   const headers: Record<string, string> = {
@@ -72,9 +74,10 @@ export async function POST(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { proxy: string[] } }
+  { params }: { params: Promise<{ proxy: string[] }> }
 ) {
-  const path = params.proxy.join('/');
+  const { proxy } = await params;
+  const path = proxy.join('/');
   const url = `${BACKEND_URL}/api/${path}`;
   
   const headers: Record<string, string> = {
