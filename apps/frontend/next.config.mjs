@@ -8,13 +8,7 @@ const nextConfig = {
       }
     ]
   },
-  webpack: (config, { isServer }) => {
-    // Fix for chunk loading issues with dynamic imports
-    if (!isServer) {
-      config.output.publicPath = '/_next/';
-    }
-    return config;
-  }
+  turbopack: {}
 };
 
 export default nextConfig;
