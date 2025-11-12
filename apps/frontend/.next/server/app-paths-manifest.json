@@ -1,8 +1,3 @@
 {
-  "/forgot-password/page": "app/forgot-password/page.js",
-  "/about/page": "app/about/page.js",
-  "/our-story/page": "app/our-story/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/login/page": "app/login/page.js",
   "/page": "app/page.js"
 }
