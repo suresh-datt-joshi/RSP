@@ -2,5 +2,9 @@
   "/page": "app/page.js",
   "/login/page": "app/login/page.js",
   "/register/page": "app/register/page.js",
-  "/api/[...proxy]/route": "app/api/[...proxy]/route.js"
+  "/api/[...proxy]/route": "app/api/[...proxy]/route.js",
+  "/forgot-password/page": "app/forgot-password/page.js",
+  "/predict-yield/page": "app/predict-yield/page.js",
+  "/caldyn/page": "app/caldyn/page.js",
+  "/about/page": "app/about/page.js"
 }
