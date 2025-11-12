@@ -4,7 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
-packages = ["arrow-cpp", "cargo", "libiconv", "libxcrypt", "pkg-config", "rustc"]
+packages = ["arrow-cpp", "cargo", "chromium", "freetype", "gitFull", "lcms2", "libiconv", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "pkg-config", "playwright-driver", "rustc", "tcl", "tk", "zlib"]
 
 [workflows]
 runButton = "Project"
