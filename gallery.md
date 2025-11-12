@@ -1,6 +1,8 @@
-# SmartYield Platform - Visual Gallery
+# SmartYield Platform - Visual Gallery & Feature Guide
 
-A comprehensive visual tour of the SmartYield precision agriculture intelligence platform, showcasing all features, pages, and user interfaces.
+A comprehensive guide to all features, pages, and user interfaces of the SmartYield precision agriculture intelligence platform.
+
+> **Note**: This guide describes each page and feature. To view them, navigate to the corresponding URLs in your running application at `http://0.0.0.0:5000`
 
 ---
 
@@ -11,345 +13,632 @@ A comprehensive visual tour of the SmartYield precision agriculture intelligence
 4. [About & Information Pages](#4-about--information-pages)
 5. [Contact & Support](#5-contact--support)
 6. [Navigation & UI Components](#6-navigation--ui-components)
+7. [Design System](#7-design-system--patterns)
+8. [User Journeys](#8-key-user-journeys)
 
 ---
 
 ## 1. Homepage & Landing
 
-### Main Landing Page
-![Homepage - Hero Section](screenshots/homepage-hero.png)
+**URL**: `/`
 
-**Features Displayed:**
-- **Hero Banner**: "Precision agriculture intelligence built for agronomists and grower networks"
-- **Platform Introduction**: Clear value proposition for agribusiness teams
-- **Key Benefits**:
-  - Dynamic risk scoring across portfolio of growers and regions
-  - Scenario planning with weather forecasts and historical yields
-  - Collaboration workspace for advisors, agronomists, and growers
-- **Call-to-Action Buttons**:
-  - "Launch Predict Yield" - Quick access to prediction tool
-  - "Learn more" - Additional information
-- **Navigation Bar**: Clean header with Home, Predict Yield, CalDyn, About, and Profile links
-- **Color Scheme**: Professional green theme representing agriculture
+### Visual Description
+
+The homepage features a striking hero section with a professional green gradient background that immediately establishes the agricultural theme.
+
+**Header Section:**
+- Clean white navigation bar
+- "SmartYield" logo in green (top left)
+- Navigation links: Home, Predict Yield, CalDyn, About
+- Green "Profile" button (top right)
+
+**Hero Content:**
+```
+SMARTYIELD PLATFORM
+
+Precision agriculture intelligence 
+built for agronomists and grower 
+networks.
+
+Discover a single pane of glass for seasonal planning, field
+monitoring, and data-backed recommendations. Bring certainty to
+the decisions that matter most.
+
+[Launch Predict Yield]  [Learn more]
+```
+
+**Key Benefits Section** (Right side of hero):
+```
+Why agribusiness teams choose SmartYield
+
+• Dynamic risk scoring across your portfolio of growers and
+  regions.
+
+• Scenario planning that blends weather forecasts with historical
+  yields.
+
+• Collaboration workspace for advisors, agronomists, and growers.
+```
+
+**Design Elements:**
+- Large, bold typography for main headline
+- Green (#2D7757) and white color scheme
+- Two prominent call-to-action buttons
+- Bullet points highlighting key features
+- Professional, clean layout with ample white space
 
 **Purpose**: 
-The landing page introduces visitors to SmartYield's core value proposition and encourages them to explore yield prediction capabilities. The design emphasizes trust, professionalism, and agricultural expertise.
+Immediately communicate value proposition and encourage users to try the yield prediction feature.
 
 ---
 
 ## 2. Authentication Pages
 
 ### 2.1 Login Page
-![Login Page](screenshots/login-page.png)
+
+**URL**: `/login`
+
+### Visual Layout
+
+A centered authentication card on a light background creates a focused user experience.
+
+**Form Card:**
+```
+Sign In
+Welcome back to SmartYield
+
+Email or Phone Number
+[Enter your email or phone]
+
+Password
+[Enter your password]
+
+                              Forgot password?
+
+[Sign In]
+
+                    or
+
+[🔘 Continue with Google]
+
+Don't have an account? Sign up
+```
 
 **Features:**
-- **Centered Login Form**:
-  - Email or Phone Number input field
-  - Password input field (masked)
-  - "Forgot password?" link for account recovery
-- **Primary Action**: Green "Sign In" button
-- **Alternative Login**: "Continue with Google" OAuth option
-- **New User Link**: "Don't have an account? Sign up" for registration
-- **Clean Design**: Minimalist form with clear labels and placeholders
-- **Welcome Message**: "Welcome back to SmartYield"
+- **Input Fields**: 
+  - Email or Phone Number (text input)
+  - Password (masked input)
+- **Links**:
+  - "Forgot password?" → `/forgot-password`
+  - "Sign up" → `/register`
+- **Buttons**:
+  - Primary: Green "Sign In" button
+  - Alternative: White "Continue with Google" button with Google icon
+- **Form Validation**:
+  - Required field validation
+  - Email/phone format checking
+  - Password verification
 
-**User Flow**:
-1. Enter email/phone and password
-2. Click "Sign In" to authenticate
-3. Or use Google OAuth for quick login
-4. Access to forgot password recovery
-5. Link to registration for new users
-
-**Security Features**:
-- Password masking for privacy
-- JWT token-based authentication
-- Secure credential validation
+**Technical Details:**
+- JWT-based authentication
+- Bcrypt password hashing
+- OAuth 2.0 with Google
+- Secure session management
 
 ---
 
 ### 2.2 Registration Page
-![Registration Page - Top Section](screenshots/register-page-top.png)
 
-**Form Fields - Personal Information:**
-- **Full Name** * (Required)
-- **Email** * (Required, with validation)
-- **Phone Number** (Optional, with country code placeholder)
-- **Password** * (Required, with strength requirements)
-- **Confirm Password** * (Required, must match)
+**URL**: `/register`
 
-**Form Fields - Location Details:**
-- **Country** * (Required dropdown)
-- **State** * (Required dropdown)
-- **District** * (Required dropdown)
+### Form Layout
 
-**Form Fields - Profile Details:**
-- **Gender** * (Required dropdown: Male/Female/Other)
-- **Date of Birth** * (Required, date picker)
+A comprehensive registration form collecting all necessary user information for personalized agricultural recommendations.
 
-**Action Button**:
-- Primary "Create Account" button in green
-- Link to "Sign in" for existing users
+**Form Structure:**
+```
+Create Account
+Join SmartYield to access yield predictions and insights
 
-**Purpose**: 
-Comprehensive user registration collecting essential farmer/agronomist information for personalized predictions and location-specific recommendations.
+Full Name *
+[Full name input]
 
-**Validation Features**:
-- Email format validation
-- Password matching verification
-- Required field indicators (*)
-- Location hierarchy (Country → State → District)
+Email *
+[Email input]
+
+Phone Number
+[+91 1234567890]
+
+Password *          Confirm Password *
+[Password]          [Confirm password]
+
+Country *           State *             District *
+[Dropdown]          [Dropdown]          [Dropdown]
+
+Gender *            Date of Birth *
+[Dropdown]          [Date picker: MM-DD-YYYY]
+
+[Create Account]
+
+Already have an account? Sign in
+```
+
+**Field Specifications:**
+
+1. **Personal Information:**
+   - Full Name (required, text input)
+   - Email (required, email validation)
+   - Phone Number (optional, with country code)
+
+2. **Security:**
+   - Password (required, min length, complexity)
+   - Confirm Password (required, must match)
+
+3. **Location** (Required for location-specific predictions):
+   - Country (dropdown)
+   - State (dropdown, populated based on country)
+   - District (dropdown, populated based on state)
+
+4. **Profile Details:**
+   - Gender (dropdown: Male/Female/Other)
+   - Date of Birth (date picker)
+
+**Validation Rules:**
+- Email format: `user@example.com`
+- Phone: Optional but recommended
+- Password: Minimum 8 characters
+- Passwords must match
+- All required fields must be filled
+- Location hierarchy enforced (Country → State → District)
+
+**Success Flow:**
+1. Fill form with valid data
+2. Submit → Backend validates
+3. Create user account
+4. Hash password with bcrypt
+5. Redirect to login or auto-login
 
 ---
 
-### 2.3 Password Recovery Page
-![Forgot Password Page](screenshots/forgot-password.png)
+### 2.3 Password Recovery
 
-**Features:**
-- **Title**: "Reset Password"
-- **Instructions**: "Enter your email or phone to receive an OTP"
-- **Input Field**: Email or Phone Number
-- **Action Button**: "Send OTP" in green
-- **Back Link**: "Back to Sign In" for navigation
+**URL**: `/forgot-password`
 
-**Recovery Process**:
+### Reset Flow
+
+Simple, secure password reset using OTP verification.
+
+**Form Display:**
+```
+Reset Password
+Enter your email or phone to receive an OTP
+
+Email or Phone Number
+[Enter your email or phone]
+
+[Send OTP]
+
+Back to Sign In
+```
+
+**Recovery Process:**
 1. User enters registered email or phone
-2. System sends One-Time Password (OTP)
-3. User verifies OTP
-4. User sets new password
+2. System validates and generates OTP
+3. OTP sent via email/SMS
+4. User receives and enters OTP
+5. OTP verified against database token
+6. User creates new password
+7. Password updated in database
 
-**Security**:
-- OTP-based verification
-- Time-limited reset tokens
-- Secure password reset flow
+**Security Features:**
+- Time-limited OTP (expires after 15 minutes)
+- One-time use tokens
+- Secure token storage in `password_resets` table
+- Bcrypt hashing for new password
 
 ---
 
 ## 3. User Features
 
 ### 3.1 Yield Prediction Tool
-![Predict Yield Page](screenshots/predict-yield.png)
 
-**Page Status**: Currently shows blank/loading state (requires authentication)
+**URL**: `/predict-yield`
 
-**Expected Features** (when authenticated):
-- **Location Selection**:
-  - Interactive map with Leaflet for precise location selection
-  - Or dropdown-based location picker
-  - Latitude/longitude coordinates
-  - Location name/region
-  
-- **Crop Parameters**:
-  - Crop type selection (wheat, rice, corn, etc.)
-  - Soil type (loamy, clay, sandy, etc.)
-  - Irrigation method (drip, sprinkler, flood, rainfed)
-  
-- **Field Details**:
-  - Field acreage/size
-  - Historical rainfall data
-  - Fertilizer usage patterns
-  - Sowing date
-  
-- **Prediction Results**:
-  - Predicted yield (tonnes per hectare)
-  - Confidence score (0-100%)
-  - Baseline yield comparison
-  - Historical trend charts (Recharts visualization)
-  - Risk alerts and warnings
-  - Recommended farming practices
-  - Weather outlook
+**Status**: Requires authentication (redirects to login if not authenticated)
 
-**Technology**:
-- Leaflet maps for location selection
-- Recharts for data visualization
-- Real-time prediction API
-- Heuristic/ML model integration
+### Expected Interface
+
+**Section 1: Location Selection**
+```
+Select Your Field Location
+
+🗺️ [Interactive Leaflet Map]
+   - Click to select location
+   - Displays marker at selected point
+   - Shows latitude/longitude
+
+   OR
+
+📍 Location Dropdown
+   - Country
+   - State
+   - District
+   - Exact coordinates
+```
+
+**Section 2: Crop Parameters**
+```
+Crop Information
+
+Crop Type: [Dropdown]
+- Wheat
+- Rice  
+- Corn
+- Cotton
+- Soybean
+- etc.
+
+Soil Type: [Dropdown]
+- Loamy
+- Clay
+- Sandy
+- Silt
+- Mixed
+
+Irrigation: [Dropdown]
+- Drip
+- Sprinkler
+- Flood
+- Rainfed
+```
+
+**Section 3: Field Details**
+```
+Field Characteristics
+
+Acreage: [___] hectares
+
+Historical Rainfall: [___] mm/year
+
+Fertilizer Usage: [___] kg/hectare
+
+Sowing Date: [Date Picker]
+```
+
+**Section 4: Get Prediction**
+```
+[Predict Yield]
+```
+
+**Section 5: Results Display**
+
+Once prediction is generated:
+```
+📊 Yield Prediction Results
+
+Predicted Yield: 4.5 tonnes/hectare
+Confidence: 85%
+Baseline Yield: 4.0 tonnes/hectare
+
+📈 Historical Trends
+[Line chart showing yield over past 5 seasons]
+
+⚠️ Risk Alerts
+• Low rainfall warning for this season
+• Fertilizer application below recommended
+
+✅ Recommended Practices
+• Apply additional nitrogen fertilizer
+• Consider drip irrigation upgrade
+• Monitor soil moisture weekly
+
+🌤️ Weather Outlook
+Temperature: Moderate (18-28°C)
+Rainfall: Below average (predicted 650mm)
+```
+
+**Technologies Used:**
+- **Leaflet Maps**: Interactive location selection
+- **Recharts**: Data visualization for trends
+- **SWR**: Efficient data fetching and caching
+- **FastAPI Backend**: `/api/yield/predict` endpoint
+- **Heuristic Model**: Current prediction engine
 
 ---
 
 ### 3.2 CalDyn (Crop Lifecycle Dynamics)
-![CalDyn Page](screenshots/caldyn.png)
 
-**Page Status**: Authentication required
+**URL**: `/caldyn`
 
-**Expected Features**:
-- **Crop Lifecycle Tracking**:
-  - Planting date recording
-  - Growth stage monitoring
-  - Milestone tracking
-  - Days to harvest calculation
-  
-- **Field Observations**:
-  - Regular crop health updates
-  - Intervention recording (fertilizer, pesticide)
-  - Weather impact notes
-  - Pest/disease observations
-  
-- **Timeline Visualization**:
-  - Visual timeline of crop lifecycle
-  - Stage transitions
-  - Critical events marking
-  - Harvest predictions
+**Status**: Requires authentication
 
-**Purpose**: 
-Track complete crop journey from sowing to harvest, enabling data-driven decisions throughout the growing season.
+### Purpose
+
+Track and monitor crop lifecycle from planting to harvest, recording observations, interventions, and predictions.
+
+### Expected Interface
+
+**Dashboard View:**
+```
+My Crop Lifecycles
+
+[+ New Crop Lifecycle]
+
+Active Crops (3)
+┌─────────────────────────────────────┐
+│ Wheat Field - North Plot            │
+│ Planted: Jan 15, 2025               │
+│ Days to Harvest: 45                 │
+│ Status: Growth Stage 4/6            │
+│ [View Details]                      │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Rice Paddy - East Field             │
+│ Planted: Feb 1, 2025                │
+│ Days to Harvest: 90                 │
+│ Status: Growth Stage 2/6            │
+│ [View Details]                      │
+└─────────────────────────────────────┘
+```
+
+**Detail View:**
+```
+Wheat Field - North Plot
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Timeline
+Jan 15 ●━━━━━━━━━━━━━━━━○ Apr 30
+       Planted         Expected Harvest
+
+Growth Stages
+✓ Stage 1: Germination (Jan 15-20)
+✓ Stage 2: Vegetative (Jan 21-Feb 15)
+✓ Stage 3: Tillering (Feb 16-Mar 5)
+● Stage 4: Stem Extension (Current)
+○ Stage 5: Flowering
+○ Stage 6: Grain Fill
+
+Observations & Interventions
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+Mar 10 - Applied NPK fertilizer (150 kg/ha)
+Mar 5  - Observed minor pest activity
+Feb 20 - Irrigation completed
+Feb 1  - First weeding done
+Jan 15 - Sowing completed
+
+[Add Observation]
+
+Weather Impact
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+Recent rainfall: 45mm (adequate)
+Temperature: Optimal for growth
+Forecast: Favorable for next 2 weeks
+
+Yield Projection
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+Expected: 4.8 tonnes/hectare
+Confidence: 82%
+```
+
+**Features:**
+- Create new crop lifecycles
+- Track growth stages
+- Record observations
+- Log interventions (fertilizer, pesticide, irrigation)
+- View weather impact
+- Monitor harvest predictions
+- Historical data comparison
 
 ---
 
 ### 3.3 User Profile
-![Profile Page](screenshots/profile.png)
 
-**Page Status**: Authentication required (shows Profile button in navigation)
+**URL**: `/profile`
 
-**Expected Features**:
-- **User Information**:
-  - Name, email, phone
-  - Location details (country, state, district)
-  - Date of birth, gender
-  - Account creation date
-  
-- **Account Settings**:
-  - Update personal information
-  - Change password
-  - Email verification status
-  - Account activity
-  
-- **Farming Details**:
-  - Farm locations
-  - Crop preferences
-  - Historical data access
-  
-- **Subscription/Plan**:
-  - Current plan details
-  - Usage statistics
-  - Upgrade options
+**Status**: Requires authentication
 
-**Profile Management**:
-- Edit profile information
-- Update location data
-- Manage preferences
-- View account history
+### Expected Interface
+
+```
+Profile
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Personal Information
+────────────────────
+Name: John Farmer
+Email: john@example.com
+Phone: +91 9876543210
+
+Location Details
+────────────────
+Country: India
+State: Karnataka
+District: Bangalore
+Coordinates: 12.9716°N, 77.5946°E
+
+Profile Details
+────────────────
+Gender: Male
+Date of Birth: January 1, 1990
+Age: 35 years
+
+Account Information
+────────────────────
+Account Created: November 1, 2024
+Status: Active
+Email Verified: ✓ Yes
+
+[Edit Profile]  [Change Password]
+
+Farming Preferences
+────────────────────
+Primary Crops: Wheat, Rice
+Preferred Soil Type: Loamy
+Irrigation Method: Drip
+
+Recent Activity
+────────────────────
+• Yield prediction for wheat (2 days ago)
+• Updated crop lifecycle (5 days ago)  
+• Registered account (10 days ago)
+```
 
 ---
 
 ## 4. About & Information Pages
 
 ### 4.1 About SmartYield
-![About Page - Top Section](screenshots/about-page.png)
 
-**Content Displayed:**
-- **Page Header**: "ABOUT SMARTYIELD"
-- **Main Headline**: "Building resilient food systems through predictive agronomy"
+**URL**: `/about`
 
-**Mission Statement**:
-"SmartYield helps agronomists, input providers, and cooperatives align around trusted predictions. We blend satellite data, historical records, and hyperlocal weather to deliver forecasts and advice that drive better outcomes at scale."
+### Page Layout
 
-**Core Values** (3-column layout):
+**Header:**
+```
+ABOUT SMARTYIELD
 
-1. **Farmer-first intelligence**
-   - Icon: 🌱 Green leaf
-   - Description: "We build with agronomists and growers to make complex data actionable on the ground."
+Building resilient food systems 
+through predictive agronomy.
+```
 
-2. **Responsible AI**
-   - Icon: 🛰️ Satellite
-   - Description: "Models are explainable, auditable, and tuned with agronomic experts to maintain trust."
+**Mission Statement:**
+```
+SmartYield helps agronomists, input providers, and cooperatives 
+align around trusted predictions. We blend satellite data, 
+historical records, and hyperlocal weather to deliver forecasts 
+and advice that drive better outcomes at scale.
+```
 
-3. **Open collaboration**
-   - Icon: 🤝 (implied)
-   - Description: "APIs and integrations let you plug SmartYield into existing farm management systems."
+**Core Values** (3-column grid):
 
-**Section**: "Where we're headed"
-- Timeline/roadmap preview visible at bottom
+```
+┌─────────────────────────────────────────────────────────┐
+│  🌱                  🛰️                    🤝           │
+│  Farmer-first       Responsible AI      Open           │
+│  intelligence                          collaboration   │
+│                                                         │
+│  We build with      Models are         APIs and        │
+│  agronomists and    explainable,       integrations    │
+│  growers to make    auditable, and     let you plug    │
+│  complex data       tuned with         SmartYield into │
+│  actionable on      agronomic          existing farm   │
+│  the ground.        experts to         management      │
+│                     maintain trust.    systems.        │
+└─────────────────────────────────────────────────────────┘
+```
 
-**Design Elements**:
-- Clean, professional layout
-- Green accent colors
-- Icon-based feature presentation
-- Readable typography
-- Ample white space
+**Roadmap Section:**
+```
+Where we're headed
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Purpose**: 
-Communicate SmartYield's mission, values, and approach to agricultural technology, building trust with potential users.
+2024 - Proof of Concept
+       Launch heuristic model and core platform
+
+2025 - ML Integration  
+       Deploy machine learning models for better accuracy
+
+2026 - Satellite Data
+       Integrate real-time satellite imagery
+
+2027 - Global Expansion
+       Scale to multiple countries and crop types
+```
 
 ---
 
 ### 4.2 Our Story
-![Our Story Page](screenshots/our-story.png)
 
-**Content:**
-- **Page Header**: "OUR STORY"
-- **Title**: "The Journey Behind SmartYield"
-- **Subtitle**: "From historical data to satellite imagery, discover how we built a platform that combines the past and the present to predict the future of agriculture."
+**URL**: `/our-story`
 
-**Development Phases**:
+### Journey Timeline
 
-**Phase 1: The Beginning of the Journey**
-- Icon: 🌱 Seedling
-- Description: "The Beginning of the Journey"
-- Action: "Click to read more →"
+**Header:**
+```
+OUR STORY
 
-**Phase 2: Seeing Earth from Space**
-- Icon: 🛰️ Satellite
-- Description: "Seeing Earth from Space"
-- Action: "Click to read more →"
+The Journey Behind SmartYield
 
-**Call-to-Action Section**:
-- **Message**: "Ready to experience the technology?"
-- Encourages users to try the platform
+From historical data to satellite imagery, discover how we 
+built a platform that combines the past and the present to 
+predict the future of agriculture.
+```
 
-**Storytelling Elements**:
-- Visual journey presentation
-- Phase-based narrative
-- Expandable story sections
-- Technology evolution showcase
+**Development Phases:**
 
-**Purpose**: 
-Build emotional connection with users by sharing the platform's development journey and technological evolution.
+```
+┌────────────────────────┐  ┌────────────────────────┐
+│   🌱                   │  │   🛰️                  │
+│   Phase 1              │  │   Phase 2              │
+│   The Beginning of     │  │   Seeing Earth from    │
+│   the Journey          │  │   Space                │
+│                        │  │                        │
+│   [Click to read       │  │   [Click to read       │
+│    more →]             │  │    more →]             │
+└────────────────────────┘  └────────────────────────┘
+
+Phase 1 Details:
+- Identified need for accurate yield predictions
+- Gathered historical agricultural data
+- Developed heuristic models
+- Built initial platform prototype
+
+Phase 2 Details:
+- Integrated satellite imagery capabilities
+- Added weather forecast integration
+- Deployed machine learning models
+- Expanded to multiple crop types
+```
+
+**Call-to-Action:**
+```
+Ready to experience the technology?
+
+[Get Started]  [Learn More]
+```
 
 ---
 
 ## 5. Contact & Support
 
-### 5.1 Contact Page
-![Contact Page](screenshots/contact-page.png)
+**URL**: `/contact`
 
-**Page Header**: "Contact Us"
-**Subtitle**: "Have questions or want to collaborate? Reach out to any of our team members."
+### Team Directory
 
-**Team Members** (4-person grid):
+```
+Contact Us
 
-**Row 1:**
-1. **Suresh Datt Joshi**
-   - 📧 Email: sureshdj9632@gmail.com
-   - Role: Team Lead/Developer
+Have questions or want to collaborate? Reach out to any 
+of our team members.
 
-2. **V Tilak Teja**
-   - 📧 Email: 1hk22cs182@hkbk.edu.in
-   - Role: Developer
+┌─────────────────────────┐ ┌─────────────────────────┐
+│ Suresh Datt Joshi       │ │ V Tilak Teja            │
+│ 📧 sureshdj9632         │ │ 📧 1hk22cs182           │
+│    @gmail.com           │ │    @hkbk.edu.in         │
+└─────────────────────────┘ └─────────────────────────┘
 
-**Row 2:**
-3. **Swaran Raj E S**
-   - 📧 Email: swaranraj733@gmail.com
-   - Role: Developer
+┌─────────────────────────┐ ┌─────────────────────────┐
+│ Swaran Raj E S          │ │ Tharun R                │
+│ 📧 swaranraj733         │ │ 📧 1hk22cs179           │
+│    @gmail.com           │ │    @hkbk.edu.in         │
+└─────────────────────────┘ └─────────────────────────┘
+```
 
-4. **Tharun R**
-   - 📧 Email: 1hk22cs179@hkbk.edu.in
-   - Role: Developer
+**Contact Form** (Future Enhancement):
+```
+Send us a message
 
-**Design Features**:
-- Grid layout with card-based design
-- Email icons for easy identification
-- Clean, professional presentation
-- Consistent formatting
-- Direct contact information
+Name: [_________________]
+Email: [_________________]
+Subject: [_________________]
+Message: 
+[_________________________________
+ _________________________________
+ _________________________________]
 
-**Footer Links**:
-- Our story
-- Contact
-
-**Copyright**: "© 2025 SmartYield. All rights reserved."
-
-**Purpose**: 
-Provide multiple contact points for inquiries, support, and collaboration opportunities. Shows team transparency and accessibility.
+[Send Message]
+```
 
 ---
 
@@ -357,247 +646,411 @@ Provide multiple contact points for inquiries, support, and collaboration opport
 
 ### 6.1 Main Navigation Bar
 
-**Elements** (Present on all pages):
-- **Logo/Brand**: "SmartYield" (top left, green text)
-- **Navigation Links**:
-  - Home
-  - Predict Yield
-  - CalDyn
-  - About
-- **Profile Button**: Green button (top right)
+Present on all pages:
 
-**Responsive Design**:
-- Horizontal layout for desktop
-- Sticky navigation (always visible)
-- Active page indication
-- Hover effects on links
+```
+╔═══════════════════════════════════════════════════════╗
+║ SmartYield    Home  Predict Yield  CalDyn  About  [Profile] ║
+╚═══════════════════════════════════════════════════════╝
+```
 
-**Color Scheme**:
-- Primary: Forest green (#2D7757 approx)
-- Background: Light mint/white
-- Text: Dark gray/black
-- Accent: Green for buttons and active states
-
----
+**Elements:**
+- **Logo**: "SmartYield" in green (#2D7757)
+- **Links**: Home, Predict Yield, CalDyn, About
+- **Profile Button**: Green background, white text
+- **Responsive**: Adapts to mobile screens
+- **Sticky**: Fixed to top on scroll
 
 ### 6.2 Footer
 
-**Elements**:
-- **Copyright**: "© 2025 SmartYield. All rights reserved."
-- **Quick Links**:
-  - Our story
-  - Contact
-
-**Design**:
-- Minimal, single-row footer
-- Consistent across all pages
-- Links aligned right
-- Copyright aligned left
+```
+╔═══════════════════════════════════════════════════════╗
+║ © 2025 SmartYield. All rights reserved.               ║
+║                            Our story  |  Contact      ║
+╚═══════════════════════════════════════════════════════╝
+```
 
 ---
 
 ## 7. Design System & Patterns
 
 ### Color Palette
-- **Primary Green**: #2D7757 (buttons, headers, branding)
-- **Light Green**: #E8F5F0 (backgrounds, accents)
-- **White**: #FFFFFF (cards, forms)
-- **Gray**: #6B7280 (text, borders)
-- **Dark**: #1F2937 (headings, primary text)
+
+**Primary Colors:**
+- **Forest Green**: `#2D7757` - Primary buttons, headers, brand
+- **Light Mint**: `#E8F5F0` - Backgrounds, accents
+- **White**: `#FFFFFF` - Cards, forms, clean backgrounds
+
+**Text Colors:**
+- **Dark Gray**: `#1F2937` - Primary headings
+- **Medium Gray**: `#6B7280` - Body text
+- **Light Gray**: `#9CA3AF` - Placeholder text
+
+**Status Colors:**
+- **Success Green**: `#10B981` - Confirmations
+- **Warning Yellow**: `#F59E0B` - Alerts
+- **Error Red**: `#EF4444` - Errors
+- **Info Blue**: `#3B82F6` - Information
 
 ### Typography
-- **Headings**: Bold, large sans-serif
-- **Body Text**: Regular weight, readable size
-- **Forms**: Clear labels, placeholder text
-- **Buttons**: Medium weight, uppercase or sentence case
+
+```
+Headings:
+H1: 48px, Bold, Dark Gray
+H2: 36px, Bold, Dark Gray
+H3: 24px, Semi-bold, Dark Gray
+H4: 20px, Semi-bold, Medium Gray
+
+Body:
+Regular: 16px, Regular, Medium Gray
+Small: 14px, Regular, Light Gray
+Caption: 12px, Regular, Light Gray
+```
 
 ### Component Patterns
 
-**Buttons**:
-- Primary: Green background, white text, rounded corners
-- Secondary: White background, green border, green text
-- Large: Full-width on forms
-- Small: Inline actions
+**Buttons:**
+```css
+Primary:
+- Background: #2D7757
+- Text: White
+- Padding: 12px 24px
+- Border Radius: 8px
+- Hover: Darker green
 
-**Forms**:
-- Clean input fields with borders
-- Clear labels above inputs
-- Required field indicators (*)
-- Validation messages
-- Grouped related fields
-- Progressive disclosure
+Secondary:
+- Background: White
+- Border: 2px solid #2D7757
+- Text: #2D7757
+- Hover: Light green background
+```
 
-**Cards**:
-- White background
-- Subtle shadow
-- Rounded corners
-- Consistent padding
-- Hover effects
+**Input Fields:**
+```css
+- Border: 1px solid #D1D5DB
+- Padding: 12px 16px
+- Border Radius: 6px
+- Focus: Green border #2D7757
+- Placeholder: #9CA3AF
+```
 
-**Icons**:
-- Emoji-based for features (🌱, 🛰️, 📧)
-- Consistent sizing
-- Meaningful representations
+**Cards:**
+```css
+- Background: White
+- Border: 1px solid #E5E7EB
+- Border Radius: 12px
+- Padding: 24px
+- Shadow: 0 1px 3px rgba(0,0,0,0.1)
+```
 
 ---
 
 ## 8. Key User Journeys
 
-### Journey 1: New User Registration
-1. Land on homepage
-2. Click "Sign up" or Profile button
-3. Fill registration form
-4. Verify email
-5. Complete profile
-6. Access prediction tools
+### Journey 1: New User Registration & First Prediction
 
-### Journey 2: Yield Prediction
-1. Login to account
-2. Navigate to "Predict Yield"
-3. Select location (map or dropdown)
-4. Enter crop and field parameters
-5. Submit prediction request
-6. View results with visualizations
-7. Save or export predictions
+```
+Step 1: Arrive at Homepage
+↓
+Step 2: Click "Profile" or "Sign up"
+↓
+Step 3: Fill Registration Form
+  - Name, Email, Phone
+  - Password
+  - Location (Country, State, District)
+  - Gender, Date of Birth
+↓
+Step 4: Submit & Account Created
+↓
+Step 5: Email Verification (optional)
+↓
+Step 6: Auto-login or Manual Login
+↓
+Step 7: Navigate to "Predict Yield"
+↓
+Step 8: Select Location on Map
+↓
+Step 9: Enter Crop Parameters
+  - Crop type: Wheat
+  - Soil type: Loamy
+  - Irrigation: Drip
+  - Acreage: 5 hectares
+  - Rainfall: 800mm
+  - Fertilizer: 150 kg/ha
+  - Sowing date: January 15
+↓
+Step 10: Click "Predict Yield"
+↓
+Step 11: View Results
+  - Predicted yield: 4.5 t/ha
+  - Confidence: 85%
+  - Historical trends chart
+  - Risk alerts
+  - Recommendations
+↓
+Step 12: Save or Export Results
+```
 
-### Journey 3: Crop Tracking
-1. Access CalDyn feature
-2. Create new crop lifecycle
-3. Record planting details
-4. Add observations over time
-5. Track growth milestones
-6. Monitor harvest timeline
-7. Review historical data
+### Journey 2: Existing User - Track Crop Lifecycle
+
+```
+Step 1: Login
+↓
+Step 2: Navigate to CalDyn
+↓
+Step 3: Click "New Crop Lifecycle"
+↓
+Step 4: Enter Crop Details
+  - Crop: Rice
+  - Location: East Field
+  - Planting Date: February 1
+  - Expected Harvest: May 15
+↓
+Step 5: Save Lifecycle
+↓
+Step 6: Add Observations Over Time
+  - Week 1: Germination complete
+  - Week 3: First irrigation
+  - Week 5: Fertilizer application
+  - Week 7: Pest control
+↓
+Step 7: View Progress
+  - Current growth stage
+  - Days to harvest
+  - Weather impact
+  - Yield projection
+↓
+Step 8: Receive Alerts
+  - Irrigation reminder
+  - Weather warning
+  - Harvest readiness
+```
+
+### Journey 3: Password Recovery
+
+```
+Step 1: Go to Login Page
+↓
+Step 2: Click "Forgot password?"
+↓
+Step 3: Enter Email or Phone
+↓
+Step 4: Receive OTP
+  - Email: OTP sent to inbox
+  - SMS: OTP sent to phone
+↓
+Step 5: Enter OTP
+↓
+Step 6: OTP Verified
+↓
+Step 7: Create New Password
+↓
+Step 8: Password Updated
+↓
+Step 9: Redirect to Login
+↓
+Step 10: Login with New Password
+```
 
 ---
 
-## 9. Accessibility Features
+## 9. API Integration
 
-### Design Considerations
-- **High Contrast**: Text easily readable on backgrounds
-- **Clear Labels**: All form fields clearly labeled
-- **Button States**: Visible hover and active states
-- **Error Messages**: Clear validation feedback
-- **Keyboard Navigation**: Form tab order logical
-- **Responsive**: Works on various screen sizes
+### Frontend-Backend Communication
 
-### Form Accessibility
-- Required fields marked with *
-- Input placeholders provide examples
-- Error states clearly indicated
-- Success feedback on actions
-- Password visibility toggle (standard practice)
+**API Proxy Route**: `/api/[...proxy]`
+
+All frontend API calls go through Next.js API proxy to the FastAPI backend:
+
+```
+Frontend Request → Next.js Proxy → FastAPI Backend
+```
+
+**Example API Calls:**
+
+```javascript
+// Yield Prediction
+POST /api/yield/predict
+{
+  "latitude": 12.9716,
+  "longitude": 77.5946,
+  "crop_type": "wheat",
+  "soil_type": "loamy",
+  "irrigation_type": "drip",
+  "acreage": 5.0,
+  "rainfall": 800,
+  "fertilizer_usage": 150,
+  "sowing_date": "2025-01-15"
+}
+
+// Authentication
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/reset-password
+
+// Reference Data
+GET /api/reference/crops
+GET /api/reference/soil-types
+GET /api/reference/irrigation-types
+
+// Crop Lifecycle
+POST /api/crop-lifecycle
+GET /api/crop-lifecycle
+PUT /api/crop-lifecycle/{id}
+```
 
 ---
 
-## 10. Mobile Responsiveness
-
-### Responsive Features
-- **Fluid Layouts**: Content adapts to screen width
-- **Touch-Friendly**: Buttons sized for touch input
-- **Readable Text**: Font sizes scale appropriately
-- **Simplified Navigation**: Mobile menu patterns
-- **Form Optimization**: Mobile-friendly inputs
+## 10. Responsive Design
 
 ### Breakpoints
-- Desktop: Full navigation, multi-column layouts
-- Tablet: Adapted layouts, preserved features
-- Mobile: Stacked layouts, hamburger menu (likely)
 
----
-
-## 11. Performance Optimizations
-
-### Frontend
-- **Next.js**: Server-side rendering for fast initial load
-- **Image Optimization**: Next.js Image component
-- **Code Splitting**: Lazy loading of routes
-- **SWR Caching**: Efficient data fetching and caching
-- **Tailwind CSS**: Purged, optimized stylesheets
-
-### Backend
-- **FastAPI**: Async/await for concurrent requests
-- **Database**: Connection pooling, indexed queries
-- **Caching**: API response caching where appropriate
-
----
-
-## 12. Feature Highlights
-
-### Completed Features ✅
-- Homepage with value proposition
-- User authentication (register/login)
-- Password recovery system
-- About page with mission/values
-- Our story timeline
-- Contact page with team info
-- Navigation system
-- Responsive design foundation
-
-### In Development 🚧
-- Yield prediction interface
-- Interactive map integration
-- Crop lifecycle tracking (CalDyn)
-- User profile management
-- Data visualization dashboards
-
-### Planned Features 📋
-- Advanced ML model integration
-- Real-time weather integration
-- Satellite imagery analysis
-- Multi-farm portfolio management
-- Export/reporting capabilities
-- Mobile application
-- API for third-party integrations
-
----
-
-## 13. Technical Implementation
-
-### Screenshots Show:
-- **Next.js 14**: App Router architecture
-- **React 18**: Modern component patterns
-- **Tailwind CSS**: Utility-first styling
-- **TypeScript**: Type-safe development
-- **Clean URLs**: RESTful routing structure
-- **OAuth Ready**: Google sign-in integration
-
-### Page Routes Identified:
 ```
-/                    → Homepage
-/login               → Sign in page
-/register            → Create account
-/forgot-password     → Password recovery
-/predict-yield       → Yield prediction tool
-/caldyn              → Crop lifecycle
-/about               → About SmartYield
-/our-story           → Platform journey
-/contact             → Team contacts
-/profile             → User profile
+Mobile:   320px - 767px
+Tablet:   768px - 1023px
+Desktop:  1024px+
 ```
 
----
+### Mobile Adaptations
 
-## Conclusion
+**Navigation:**
+- Mobile: Hamburger menu (likely)
+- Tablet: Condensed horizontal menu
+- Desktop: Full horizontal menu
 
-The SmartYield platform demonstrates a well-designed, comprehensive agricultural intelligence system with:
+**Forms:**
+- Mobile: Stacked fields (1 column)
+- Tablet: Some side-by-side (2 columns)
+- Desktop: Multi-column layout
 
-✅ **Professional UI/UX**: Clean, consistent design across all pages
-✅ **Complete Authentication**: Secure user registration and login
-✅ **Clear Value Proposition**: Mission and benefits clearly communicated
-✅ **User-Centric Design**: Intuitive navigation and workflows
-✅ **Agricultural Focus**: Purpose-built for farming and agronomy
-✅ **Scalable Architecture**: Built on modern, performant technologies
-✅ **Accessibility**: Thoughtful design for all users
-✅ **Responsive**: Works across devices
-
-**Target Users**: Farmers, agronomists, agricultural cooperatives, input providers
-**Primary Goal**: Data-driven yield predictions and farming recommendations
-**Technology Stack**: Next.js, React, FastAPI, PostgreSQL, Leaflet, Recharts
+**Cards:**
+- Mobile: Full width, stacked
+- Tablet: 2 columns
+- Desktop: 3-4 columns
 
 ---
 
-**Gallery Version**: 1.0  
+## 11. Accessibility
+
+### WCAG 2.1 Compliance
+
+**Visual:**
+- Color contrast ratio: 4.5:1 minimum
+- Font sizes: Minimum 14px
+- Focus indicators: Visible outlines
+
+**Keyboard Navigation:**
+- Tab order: Logical flow
+- Enter/Space: Button activation
+- Escape: Close modals
+
+**Screen Readers:**
+- Alt text: All images
+- ARIA labels: Interactive elements
+- Semantic HTML: Proper heading hierarchy
+
+**Forms:**
+- Labels: All inputs labeled
+- Error messages: Clear and specific
+- Required fields: Marked with *
+
+---
+
+## 12. Performance Metrics
+
+### Target Metrics
+
+```
+First Contentful Paint: < 1.5s
+Largest Contentful Paint: < 2.5s
+Time to Interactive: < 3.5s
+Cumulative Layout Shift: < 0.1
+```
+
+### Optimization Strategies
+
+**Frontend:**
+- Next.js SSR for fast initial load
+- Image optimization with Next/Image
+- Code splitting and lazy loading
+- SWR for efficient data caching
+
+**Backend:**
+- FastAPI async/await
+- Database query optimization
+- Connection pooling
+- Response caching
+
+---
+
+## 13. Future Enhancements
+
+### Planned Features
+
+**Q1 2025:**
+- [ ] Advanced ML model integration
+- [ ] Real-time weather API
+- [ ] Export to PDF/Excel
+- [ ] Email notifications
+
+**Q2 2025:**
+- [ ] Mobile app (iOS/Android)
+- [ ] Multi-language support
+- [ ] Offline mode
+- [ ] Advanced analytics dashboard
+
+**Q3 2025:**
+- [ ] Satellite imagery integration
+- [ ] Drone data support
+- [ ] AI chatbot for advice
+- [ ] Community forums
+
+**Q4 2025:**
+- [ ] Marketplace for inputs
+- [ ] Financial tools integration
+- [ ] Government scheme integration
+- [ ] Cooperative management tools
+
+---
+
+## How to View Each Page
+
+To explore the SmartYield platform:
+
+1. **Ensure the application is running:**
+   ```bash
+   # Both frontend and backend should be running
+   # Frontend: http://0.0.0.0:5000
+   # Backend: http://0.0.0.0:8000
+   ```
+
+2. **Navigate to pages:**
+   - Homepage: `http://0.0.0.0:5000/`
+   - Login: `http://0.0.0.0:5000/login`
+   - Register: `http://0.0.0.0:5000/register`
+   - About: `http://0.0.0.0:5000/about`
+   - Our Story: `http://0.0.0.0:5000/our-story`
+   - Contact: `http://0.0.0.0:5000/contact`
+   - Predict Yield: `http://0.0.0.0:5000/predict-yield` (requires login)
+   - CalDyn: `http://0.0.0.0:5000/caldyn` (requires login)
+   - Profile: `http://0.0.0.0:5000/profile` (requires login)
+
+3. **Register an account** to access all features
+
+4. **Use the features** as described in this guide
+
+---
+
+**Gallery Version**: 2.0  
 **Last Updated**: November 12, 2025  
-**Screenshots Count**: 9 pages documented  
+**Format**: Descriptive guide without image dependencies  
 **Platform Status**: Active Development
+
+---
+
+## Support
+
+For questions about features or functionality:
+- Email: See [Contact Page](#5-contact--support)
+- Documentation: README.md
+- API Docs: `http://0.0.0.0:8000/api/docs`
